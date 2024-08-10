@@ -2,7 +2,7 @@
 import { Router } from 'next/router';
 import { initializeApp, applicationDefault, cert, getApps } from 'firebase-admin/app';
 import { getFirestore, Timestamp, FieldValue, Filter } from 'firebase-admin/firestore';
-import serviceAccount from '../../serviceAccountKey.json';
+import serviceAccount from '../../serviceAccountKey.js';
 
 export default async function handler(req, res) {
     if (getApps().length === 0) {
