@@ -325,7 +325,7 @@ export default function MainPage() {
                 <main>
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         <form onSubmit={handleSubmitText}>
-                            <label for="message" className="mb-1 text-sm font-medium text-cyan">Write your text (we will transfer your text into words for learning). Consequently, you will see the list of words to choose. </label>
+                            <label htmlFor="message" className="mb-1 text-sm font-medium text-cyan">Write your text (we will transfer your text into words for learning). Consequently, you will see the list of words to choose. </label>
                             <textarea
                                 id="message"
                                 rows="4"
