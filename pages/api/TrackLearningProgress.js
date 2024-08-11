@@ -10,18 +10,25 @@ export default async function handler(req, res) {
             credential: cert(serviceAccount),
         });
     }
-    const db = getFirestore();
     let email = req.body.email;
+    const db = getFirestore();
+    const date = new Date();
+    console.log(date);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+    const dateString = `${year}-${month}-${day}`;
+    console.log("Current Date: " + dateString);
     let docRefDateInData = await db.collection('ProgressLearning').doc(email).get();
     let dateInData = docRefDateInData.data().Date;
     let numberOfWord = docRefDateInData.data().NumberOfWord;
     let numberOfWordCopy = [...numberOfWord];
     console.log(numberOfWord);
-    let currentDateJson = new Date();
+    let currentDateJson = new Date(dateString);
     let dateInDataJson = new Date(dateInData);
-    console.log(dateInDataJson);
     currentDateJson.setUTCHours(0,0,0,0);
     dateInDataJson.setUTCHours(0,0,0,0);
+    console.log(currentDateJson);
     let dayDifference = (currentDateJson - dateInDataJson) / (1000 * 3600 * 24);
     console.log(dayDifference);
     if (dayDifference > 0) {
@@ -39,5 +46,5 @@ export default async function handler(req, res) {
             NumberOfWord: numberOfWord
         });
     }
-    res.status(200).json({ message: 'Deleting successfully' , numberOfWord });
+    res.status(200).json({ message: 'Deleting successfully' , numberOfWord});
 }
