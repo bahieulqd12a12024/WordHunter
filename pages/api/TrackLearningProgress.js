@@ -31,6 +31,9 @@ export default async function handler(req, res) {
     console.log(currentDateJson);
     let dayDifference = (currentDateJson - dateInDataJson) / (1000 * 3600 * 24);
     console.log(dayDifference);
+    await db.collection('ProgressLearning').doc(email).update({
+        Date: dateString
+    });
     if (dayDifference > 0) {
         for (let i = 6; i > -1; i--) {
           if (i - dayDifference > -1) {
